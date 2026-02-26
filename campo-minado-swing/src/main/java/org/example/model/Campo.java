@@ -16,7 +16,7 @@ public class Campo {
     private boolean marcado = false;
 
     private final List<Campo> vizinhos = new ArrayList<>();
-    private final Set<CampoObservador> observadores = new LinkedHashSet<>();
+    private final List<CampoObservador> observadores = new ArrayList<>();
 
     public Campo(int linha, int coluna) {
         this.linha = linha;
@@ -81,7 +81,7 @@ public class Campo {
         return false;
     }
 
-    boolean vizinhacaSegura() {
+    public boolean vizinhacaSegura() {
         return vizinhos.stream().noneMatch(v -> v.minado);
     }
 
@@ -127,14 +127,15 @@ public class Campo {
         return desvendado || protegido;
     }
 
-    public long minasNaVizinhanca() {
-        return vizinhos.stream().filter(v -> v.minado).count();
+    public int minasNaVizinhanca() {
+        return (int) vizinhos.stream().filter(v -> v.minado).count();
     }
 
     public void reiniciar() {
         aberto = false;
         minado = false;
         marcado = false;
+        notificarObservador(CampoEvento.REINICIAR);
     }
 
 
