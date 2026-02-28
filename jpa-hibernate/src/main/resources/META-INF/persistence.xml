@@ -5,6 +5,7 @@
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>org.example.model.basic.Usuario</class>
+        <class>org.example.model.basic.Produto</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver"
