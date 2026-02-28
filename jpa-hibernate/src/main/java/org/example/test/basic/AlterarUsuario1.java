@@ -6,19 +6,22 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class NovoUsuario {
+public class AlterarUsuario1 {
     public static void main(String[] args) {
-
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-hibernate");
         EntityManager em = emf.createEntityManager();
 
-        Usuario usuario = new Usuario("Carlos","carlos@gmail.com");
-
         em.getTransaction().begin();
-        em.persist(usuario);
-        em.getTransaction().commit();
 
-        System.out.println("O id gerado foi : " + usuario.getId());
+        Usuario usuario = em.find(Usuario.class, 1L);
+        usuario.setNome("Nome Atualizado");
+        usuario.setEmail("email@email.com");
+        em.merge(usuario);
+
+        System.out.println(usuario.getNome());
+        System.out.println(usuario.getEmail());
+
+        em.getTransaction().commit();
 
         em.close();
         emf.close();
