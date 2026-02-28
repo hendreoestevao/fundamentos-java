@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class ConsultarPessoas2 {
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String... args) throws SQLException {
 
         Scanner sc = new Scanner(System.in);
 
@@ -36,7 +36,6 @@ public class ConsultarPessoas2 {
             System.out.println(p.getCodigo() + " - " + p.getNome());
         }
 
-        System.out.println(rs);
         stmt.close();
         connection.close();
         sc.close();
