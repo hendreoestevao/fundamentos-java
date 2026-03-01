@@ -6,6 +6,10 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>org.example.model.basic.Usuario</class>
         <class>org.example.model.basic.Produto</class>
+        <class>org.example.model.umpraum.Assento</class>
+        <class>org.example.model.umpraum.Cliente</class>
+        <class>org.example.model.umpramuitos.Pedido</class>
+        <class>org.example.model.umpramuitos.ItemPedido</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver"

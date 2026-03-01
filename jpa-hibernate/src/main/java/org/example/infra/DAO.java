@@ -36,8 +36,14 @@ public class DAO<E> {
         return this;
     }
 
-    public DAO<E> fecharT() {
+    public DAO<E> commitT() {
         em.getTransaction().commit();
+        return this;
+    }
+
+
+
+    public DAO<E> fecharT() {
         em.close();
         return this;
     }
@@ -50,6 +56,10 @@ public class DAO<E> {
     public DAO<E> incluirAtomico(E entidade) {
 
         return  this.abrirT().incluir(entidade).fecharT();
+    }
+
+    public E obterPorId(Object id) {
+        return em.find(clazz, id);
     }
 
     public List<E> obterTodos() {
