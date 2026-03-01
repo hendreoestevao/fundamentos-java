@@ -1,7 +1,5 @@
 package org.example.infra;
 
-import org.example.model.basic.Produto;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -11,8 +9,6 @@ import java.util.List;
 public class DAO<E> {
 
     private static EntityManagerFactory emf;
-    private EntityManager em;
-    private Class<E> clazz;
 
     static {
         try {
@@ -21,6 +17,9 @@ public class DAO<E> {
             // logar - log4j
         }
     }
+
+    private final EntityManager em;
+    private final Class<E> clazz;
 
     public DAO() {
         this(null);
@@ -42,7 +41,6 @@ public class DAO<E> {
     }
 
 
-
     public DAO<E> fecharT() {
         em.close();
         return this;
@@ -55,7 +53,7 @@ public class DAO<E> {
 
     public DAO<E> incluirAtomico(E entidade) {
 
-        return  this.abrirT().incluir(entidade).commitT().fecharT();
+        return this.abrirT().incluir(entidade).commitT().fecharT();
     }
 
     public E obterPorId(Object id) {
@@ -63,7 +61,7 @@ public class DAO<E> {
     }
 
     public List<E> obterTodos() {
-        return  this.obterTodos(10,0);
+        return this.obterTodos(10, 0);
     }
 
     public List<E> obterTodos(int qtde, int deslocamento) {
@@ -76,6 +74,22 @@ public class DAO<E> {
         query.setMaxResults(qtde);
         query.setFirstResult(deslocamento);
         return query.getResultList();
+    }
+
+    public List<E> consultar(String nomeConsulta, Object... params) {
+        TypedQuery<E> query = em.createNamedQuery(nomeConsulta, clazz);
+
+        for (int i = 0; i < params.length; i += 2) {
+            query.setParameter(params[i].toString(), params[i + 1]);
+        }
+
+        return query.getResultList();
+    }
+
+    public E consultarUm(String nomeConsulta, Object... param) {
+        List<E> lista = consultar(nomeConsulta, param);
+
+        return lista.isEmpty() ? null : lista.get(0);
     }
 
 }
