@@ -16,7 +16,9 @@
         <class>org.example.model.muitospramuitos.Sobrinho</class>
         <class>org.example.model.muitospramuitos.Filme</class>
         <class>org.example.model.muitospramuitos.Ator</class>
-
+        <class>org.example.model.composicao.Endereco</class>
+        <class>org.example.model.composicao.Fornecedor</class>
+        <class>org.example.model.composicao.Funcionario</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver"
