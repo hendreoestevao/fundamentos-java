@@ -10,6 +10,11 @@
         <class>org.example.model.umpraum.Cliente</class>
         <class>org.example.model.umpramuitos.Pedido</class>
         <class>org.example.model.umpramuitos.ItemPedido</class>
+        <class>org.example.model.muitospramuitos.Tio</class>
+        <class>org.example.model.muitospramuitos.Sobrinho</class>
+        <class>org.example.model.muitospramuitos.Filme</class>
+        <class>org.example.model.muitospramuitos.Ator</class>
+
 
         <properties>
             <property name="javax.persistence.jdbc.driver"

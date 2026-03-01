@@ -55,7 +55,7 @@ public class DAO<E> {
 
     public DAO<E> incluirAtomico(E entidade) {
 
-        return  this.abrirT().incluir(entidade).fecharT();
+        return  this.abrirT().incluir(entidade).commitT().fecharT();
     }
 
     public E obterPorId(Object id) {
