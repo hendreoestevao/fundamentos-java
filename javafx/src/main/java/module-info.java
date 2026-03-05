@@ -12,6 +12,9 @@ module org.example.javafx {
     requires com.almasb.fxgl.all;
 
     opens org.example.javafx to javafx.fxml;
+    opens org.example.javafx.fxml to javafx.fxml;
     exports org.example.javafx;
     exports org.example.javafx.basico;
+    exports org.example.javafx.layout;
+    exports org.example.javafx.fxml;
 }

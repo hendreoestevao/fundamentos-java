@@ -7,17 +7,28 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 public class Contador extends Application {
-    private int contador = 1;
+    private int contador;
     private Label labelNumero;
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    private void atualizarLabelNumero(Label label) {
+        label.setText(String.valueOf(contador));
+
+        label.getStyleClass().removeAll("verde", "vermelho");
+
+
+        if (contador > 0) {
+            label.getStyleClass().add("verde");
+        } else if (contador < 0) {
+            label.getStyleClass().add("vermelho");
+        }
+
     }
 
     @Override
@@ -34,8 +45,9 @@ public class Contador extends Application {
         botaoAcrescimo.getStyleClass().add("botoes");
 
         botaoAcrescimo.setOnAction(e -> {
-           contador++;
-            labelNumero.setText(String.valueOf(contador));
+            contador++;
+            atualizarLabelNumero(labelNumero);
+
         });
 
         Button botaoRemover = new Button("-");
@@ -43,7 +55,7 @@ public class Contador extends Application {
 
         botaoRemover.setOnAction(e -> {
             contador--;
-            labelNumero.setText(String.valueOf(contador));
+            atualizarLabelNumero(labelNumero);
         });
 
         HBox boxBotoes = new HBox();
@@ -60,8 +72,8 @@ public class Contador extends Application {
         boxPrincipal.getChildren().addAll(labelNumero);
         boxPrincipal.getChildren().addAll(boxBotoes);
 
-        String caminhoDoCss =  getClass().getResource("/org/example/javafx/basico/Contador.css").toExternalForm();
-        Scene scenePrincipal = new Scene(boxPrincipal, 400,400);
+        String caminhoDoCss = getClass().getResource("/org/example/javafx/basico/Contador.css").toExternalForm();
+        Scene scenePrincipal = new Scene(boxPrincipal, 400, 400);
         scenePrincipal.getStylesheets().add(caminhoDoCss);
         scenePrincipal.getStylesheets().add("https://fonts.googleapis.com/css?family=Oswald");
         primaryStage.setScene(scenePrincipal);
